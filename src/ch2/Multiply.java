@@ -27,6 +27,24 @@ public class Multiply {
         return result;
     }
 
+    // 이집트인 곱셈이랑 비슷한데 times가 홀수일 때 좀 더 효과적인듯..?
+    // 재귀 호출이 마지막에만 있으면 꼬리 재귀 호출이라 부른다고 함..
+    public int multiplyWithAccumulation(int acc, int base, int times) {
+        if (times == 1) return acc + base;
+        if (isOdd(times)) acc += base;
+        return multiplyWithAccumulation(acc, doubling(base), half(times));
+    }
+
+    //더 최적화
+    public int multiplyWithAccumulationCheckingOddFirst(int acc, int base, int times) {
+        if (isOdd(times)) {
+            acc += base;
+            if (times == 1) return acc + base;
+        }
+        return multiplyWithAccumulation(acc, doubling(base), half(times));
+    }
+
+
     private int doubling(int n) {
         return n * 2;
     }
@@ -38,7 +56,6 @@ public class Multiply {
     private boolean isOdd(int times) {
         return times % 2 == 1;
     }
-
 
 
 }
