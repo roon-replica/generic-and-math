@@ -39,7 +39,7 @@ public class Multiply {
     public int multiplyWithAccumulationCheckingOddFirst(int acc, int base, int times) {
         if (isOdd(times)) {
             acc += base;
-            if (times == 1) return acc + base;
+            if (times == 1) return acc;
         }
         return multiplyWithAccumulation(acc, doubling(base), half(times));
     }
