@@ -44,6 +44,26 @@ public class Multiply {
         return multiplyWithAccumulation(acc, doubling(base), half(times));
     }
 
+    // 재귀 사용하지 않도록 변경. (함수 호출은 비용이 크기 때문)
+    // strictly tail-recursive로 바꾸고, 반복문으로 바꾸면 된다고 함...
+    public int multiplyWithNoRecursive(int acc, int base, int times) {
+        int ret;
+
+        for (; ; ) {
+            if (isOdd(times)) {
+                acc += base;
+                if (times == 1) {
+                    ret = acc + base;
+                    break;
+                }
+            }
+            base = doubling(base);
+            times = half(times);
+        }
+
+        return ret;
+    }
+
 
     private int doubling(int n) {
         return n * 2;
